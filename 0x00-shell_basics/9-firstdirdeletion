@@ -1,4 +1,3 @@
 #!/bin/bash
+rmdir /tmp/my_first_directory
 
-# Delete the directory my_first_directory from /tmp
-rm -r /tmp/my_first_directory

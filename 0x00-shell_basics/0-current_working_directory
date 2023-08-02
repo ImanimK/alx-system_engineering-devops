@@ -1,5 +1,3 @@
 #!/bin/bash
-cat << EOF
-$(pwd)
-EOF
+pwd > output.txt
 

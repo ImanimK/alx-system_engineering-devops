@@ -1,1 +1,5 @@
-#!/bin/bash  pwd
+#!/bin/bash
+cat << EOF
+$(pwd)
+EOF
+

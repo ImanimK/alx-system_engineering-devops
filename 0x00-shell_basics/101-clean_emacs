@@ -1,2 +1,2 @@
 #!/bin/bash
-rm -f *
+rm -f *~ 2>/dev/null

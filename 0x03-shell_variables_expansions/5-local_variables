@@ -1,3 +1,2 @@
 #!/bin/bash
-declare -p | grep 'declare --'; printenv; declare -F
-
+set | grep -E '^[a-zA-Z_][a-zA-Z0-9_]*\='

@@ -1,27 +1,18 @@
-server {
-    listen 80;
-    listen [::]:80 default_server;
-    add_header X-Served-By $hostname;
-    root   /etc/nginx/html;
-    index  index.html index.htm;
-    location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-    }
-    root /var/www/html;
+#!/usr/bin/env bash
+# Configure Nginx to serve page from /airbnb-onepage/
 
-    server_name _;
+sudo apt-get update
+sudo apt-get install -y nginx
 
-    location /airbnb-onepage {
-        proxy_pass http://0.0.0.0:5000/airbnb-onepage;
-    }
+sudo mkdir -p /data/web_static/releases/test/
+sudo mkdir -p /data/web_static/shared/
 
-    location /hbnb_static {
-        alias /data/web_static/current/;
-    }
+echo "Hello HBNB!" | sudo tee /data/web_static/releases/test/index.html
 
-    location /{
-        # First attempt to serve request as file, then
-        # as directory, then fall back to displaying a 404.
-        try_files $uri $uri/ =404;
-     }
-}
+sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
+
+sudo chown -R ubuntu:ubuntu /data/
+
+sudo sed -i '37i\\tlocation /airbnb-onepage/ {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-available/default
+
+sudo service nginx restart
